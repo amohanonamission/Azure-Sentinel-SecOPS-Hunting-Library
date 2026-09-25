@@ -1,1 +1,10 @@
+// Detects sudden spikes in dropped traffic at the Network Security Group, indicating port scanning or brute force.
+// MITRE ATT&CK: T1110 (Brute Force)
 
+AzureDiagnostics
+| where Category == "NetworkSecurityGroupRuleCounter"
+| where type_s == "block"
+| summarize BlockedConnections = count() by sourceAddress_s, destinationPort_s, bin(TimeGenerated, 1h)
+| where BlockedConnections > 100
+| sort by BlockedConnections desc
+| project TimeGenerated, AttackerIP = sourceAddress_s, TargetPort = destinationPort_s, BlockedConnections
