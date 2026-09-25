@@ -1,1 +1,4 @@
-
+{
+  "_comment": "This folder contains ARM templates for Sentinel SOAR Playbooks.",
+  "Architecture_Note": "The standard deployment utilizes a Logic App triggered by a Microsoft Sentinel Incident. The workflow utilizes a System-Assigned Managed Identity with 'Network Contributor' RBAC to automatically append malicious source IP addresses to a 'Deny' rule on the perimeter NSG, reducing MTTR to zero."
+}
