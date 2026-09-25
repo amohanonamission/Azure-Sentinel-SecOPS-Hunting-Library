@@ -43,6 +43,22 @@ Detecting a threat is only half the battle. This project architects automated Az
 
 ---
 
+## 🏗️ Repository Structure
+
+```text
+
+├── Identity-Threats/
+│   ├── MFA-Fatigue-Detection.kql
+│   └── Impossible-Travel-Login.kql
+├── Network-Threats/
+│   ├── NSG-Brute-Force-Spike.kql
+├── SOAR-Playbooks/
+│   └── Block-IP-LogicApp-Template.json
+└── README.md
+
+```
+---
+
 ## 📌 SecOps Use Case 
 This repository serves as a practical implementation guide for modern Security Operations Center (SOC) workflows. It emphasizes:
 *   **Detection Engineering:** Writing optimized, time-binned queries for high-volume log spaces.
