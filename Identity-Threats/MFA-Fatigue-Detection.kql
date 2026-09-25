@@ -1,1 +1,14 @@
+// Detects MFA Fatigue (Push Spam) where a user receives multiple MFA prompts and eventually accepts one.
+// MITRE ATT&CK: T1621 (Multi-Factor Authentication Request Generation)
 
+SigninLogs
+| where ResultType == "500121" // MFA Denied/Failed
+| summarize FailedMfaCount = count() by UserPrincipalName, IPAddress, bin(TimeGenerated, 10m)
+| where FailedMfaCount >= 5
+| join kind=inner (
+    SigninLogs
+    | where ResultType == "0" // Successful login
+    | project UserPrincipalName, SuccessfulLoginTime = TimeGenerated
+) on UserPrincipalName
+| where SuccessfulLoginTime > TimeGenerated
+| project UserPrincipalName, IPAddress, FailedMfaCount, SuccessfulLoginTime
