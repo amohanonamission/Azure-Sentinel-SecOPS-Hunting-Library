@@ -1,1 +1,14 @@
+// Correlates Entra ID Sign-in logs to detect logins from geographically impossible distances within a short timeframe.
+// MITRE ATT&CK: T1078 (Valid Accounts)
 
+SigninLogs
+| where ResultType == 0
+| summarize MinTime = min(TimeGenerated), MaxTime = max(TimeGenerated) by UserPrincipalName, Location, IPAddress
+| join kind=inner (
+    SigninLogs
+    | where ResultType == 0
+    | summarize MinTime2 = min(TimeGenerated), MaxTime2 = max(TimeGenerated) by UserPrincipalName, Location, IPAddress
+) on UserPrincipalName
+| where Location != Location2
+| where datetime_diff('minute', MinTime2, MaxTime) < 60 // Less than an hour between different countries
+| project UserPrincipalName, IP1 = IPAddress, Location1 = Location, IP2 = IPAddress1, Location2 = Location2
