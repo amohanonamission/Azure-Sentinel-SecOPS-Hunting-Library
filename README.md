@@ -110,6 +110,8 @@ Detecting a threat is only half the battle. This project architects automated Az
 ├── Network-Threats/
 │   ├── NSG-Brute-Force-Spike.kql
 ├── SOAR-Playbooks/
+│   ├── Block-IP-NSG/
+│   │   └── deploy-playbook.bicep
 │   └── Block-IP-LogicApp-Template.json
 └── README.md
 
