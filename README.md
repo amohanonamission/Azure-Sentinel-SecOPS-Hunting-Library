@@ -2,6 +2,9 @@
 
 🎯 **Focus:** Microsoft Sentinel • KQL Threat Hunting • SOAR (Logic Apps) • MITRE ATT&CK • Continuous Monitoring
 
+> 🚧 This repository is actively being expanded. More practice questions, labs, notes, and examples will be added shortly.
+---
+
 ## Objective
 A structured library of Kusto Query Language (KQL) detection rules and Security Orchestration, Automation, and Response (SOAR) playbook architectures designed for Microsoft Sentinel. 
 
